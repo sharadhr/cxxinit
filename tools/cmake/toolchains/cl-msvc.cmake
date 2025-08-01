@@ -13,7 +13,7 @@ set(CMAKE_CXX_COMPILER "cl.exe")
 set(CMAKE_ASM_COMPILER "cl.exe")
 set(CMAKE_RC_COMPILER "rc.exe")
 
-set(CMAKE_LINKER_TYPE LLD)
+set(CMAKE_LINKER_TYPE MSVC)
 set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "ProgramDatabase")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -65,8 +65,11 @@ string(JOIN " " LINKER_FLAGS
     "/guard:cf"
 )
 
-string(JOIN " " ASAN_FLAGS "/fsanitize=address")
-string(JOIN " " RTC_FLAGS "/RTC1")
+string(JOIN " " ASAN_FLAGS
+    "/O2"
+    "/fsanitize=address"
+)
+set(RTC_FLAGS "/RTC1")
 
 set(FLAG_TYPES "C" "CXX")
 
@@ -83,11 +86,9 @@ endif ()
 
 foreach(CONFIG "ASAN" "RTC")
     foreach(FLAG_TYPE ${FLAG_TYPES})
-        set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS} ${WARNING_FLAGS}" CACHE STRING "" FORCE)
+        set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS}" CACHE STRING "" FORCE)
     endforeach()
 endforeach()
-
-
 
 # Set the default flags
 set(CMAKE_C_FLAGS_INIT ${WARNING_FLAGS})
