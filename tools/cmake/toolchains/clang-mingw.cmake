@@ -120,7 +120,7 @@ endif ()
 # Add `ASan` and `TSan` build types
 foreach (CONFIG "ASAN" "TSAN")
 	foreach (FLAG_TYPE ${FLAG_TYPES})
-		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS} ${WARNING_FLAGS}" CACHE STRING "" FORCE)
+		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS}" CACHE STRING "" FORCE)
 	endforeach ()
 endforeach ()
 

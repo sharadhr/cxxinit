@@ -11,19 +11,19 @@ set(COMPILER_ARGS
 )
 
 set(CMAKE_C_COMPILER
-	"clang-20"
+	"clang"
 	${COMPILER_ARGS}
 )
 set(CMAKE_CXX_COMPILER
-	"clang++-20"
+	"clang++"
 	${COMPILER_ARGS}
 )
 set(CMAKE_ASM_COMPILER
-	"clang-20"
+	"clang"
 	${COMPILER_ARGS}
 )
 set(CMAKE_RC_COMPILER
-	"llvm-rc-20"
+	"llvm-rc"
 )
 
 set(CMAKE_LINKER_TYPE LLD)
@@ -114,7 +114,7 @@ endif ()
 # Add `ASan` and `TSan` build types
 foreach (CONFIG "ASAN" "TSAN")
 	foreach (FLAG_TYPE ${FLAG_TYPES})
-		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS} ${WARNING_FLAGS}" CACHE STRING "" FORCE)
+		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS}" CACHE STRING "" FORCE)
 	endforeach ()
 endforeach ()
 

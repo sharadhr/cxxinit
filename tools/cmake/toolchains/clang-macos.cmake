@@ -95,11 +95,11 @@ if($ENV{BUILD_WITH_LTO})
 endif()
 
 # Add `ASan` and `TSan` build types
-foreach(SAN_TYPE "ASAN" "TSAN")
-  foreach(FLAG_TYPE "C" "CXX")
-    set(CMAKE_${FLAG_TYPE}_FLAGS_${SAN_TYPE} "${${SAN_TYPE}_FLAGS} ${WARNING_FLAGS}" CACHE STRING "Flags used by the ${FLAG_TYPE} compiler during ${SAN_TYPE} builds." FORCE)
-  endforeach()
-endforeach()
+foreach (CONFIG "ASAN" "TSAN")
+	foreach (FLAG_TYPE ${FLAG_TYPES})
+		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS}" CACHE STRING "" FORCE)
+	endforeach ()
+endforeach ()
 
 # Set the default flags
 set(CMAKE_C_FLAGS_INIT ${WARNING_FLAGS})
