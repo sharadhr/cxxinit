@@ -1,0 +1,44 @@
+{
+  "version": 9,
+  "include": [
+    "base-presets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "windows-base",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "inherits": [
+        "project-config"
+      ]
+    },
+    {
+      "name": "windows-clang-msvc",
+      "hidden": true,
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/clang-msvc.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md"
+      }
+    },
+    {
+      "name": "windows-cl-msvc",
+      "hidden": true,
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/cl-msvc.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md-release"
+      }
+    },
+    {
+      "name": "windows-clang-mingw",
+      "hidden": true,
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/cl-msvc.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-mingw-static"
+      }
+    }
+  ]
+}

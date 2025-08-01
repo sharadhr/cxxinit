@@ -1,0 +1,42 @@
+---
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: Align
+AllowShortCaseLabelsOnASingleLine: true
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossComments: true
+  AcrossEmptyLines: true
+  AlignCaseColons: false
+BinPackArguments: true
+BinPackParameters: true
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: true
+  AfterControlStatement: Never
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+BreakBeforeBraces: Custom
+BreakStringLiterals: false
+ColumnLimit: 160
+CompactNamespaces: true
+IndentRequiresClause: true
+RequiresClausePosition: WithPreceding
+InsertBraces: true
+PointerAlignment: Left
+QualifierAlignment: Custom
+QualifierOrder: [static, constexpr, inline, volatile, type, const]
+UseTab: ForIndentation
+
