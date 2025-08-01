@@ -18,11 +18,13 @@
     },
     {
       "name": "linux-clang",
-      "hidden": true,
       "cacheVariables": {
         "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/clang-linux.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-linux"
-      }
+      },
+      "inherits": [
+        "linux-base"
+      ]
     }
   ]
 }

@@ -21,7 +21,6 @@
     },
     {
       "name": "macos-arm64",
-      "hidden": true,
       "inherits": [
         "macos-base"
       ],
@@ -32,7 +31,6 @@
     },
     {
       "name": "macos-x64",
-      "hidden": true,
       "inherits": [
         "macos-base"
       ],

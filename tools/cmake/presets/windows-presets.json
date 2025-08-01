@@ -12,31 +12,40 @@
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
       },
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release;ASan;RTC"
+      },
       "inherits": [
         "project-config"
       ]
     },
     {
       "name": "windows-clang-msvc",
-      "hidden": true,
+      "inherits": [
+        "windows-base"
+      ],
       "cacheVariables": {
         "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/clang-msvc.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-windows-static-md"
       }
     },
     {
-      "name": "windows-cl-msvc",
-      "hidden": true,
+      "name": "windows-cl",
+      "inherits": [
+        "windows-base"
+      ],
       "cacheVariables": {
         "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/cl-msvc.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md-release"
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md"
       }
     },
     {
       "name": "windows-clang-mingw",
-      "hidden": true,
+      "inherits": [
+        "windows-base"
+      ],
       "cacheVariables": {
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/cl-msvc.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/tools/cmake/toolchains/clang-mingw.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-mingw-static"
       }
     }
