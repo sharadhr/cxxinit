@@ -4,3 +4,5 @@ set(VCPKG_LIBRARY_LINKAGE static)
 set(VCPKG_ENV_PASSTHROUGH PATH)
 
 set(VCPKG_CMAKE_SYSTEM_NAME MinGW)
+
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/../../../tools/cmake/toolchains/clang-mingw.cmake")
