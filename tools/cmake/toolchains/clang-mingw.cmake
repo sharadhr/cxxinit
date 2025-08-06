@@ -33,41 +33,31 @@ set(CMAKE_RC_COMPILER
 )
 
 set(CMAKE_LINKER_TYPE LLD)
-
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Some useful flags
 if (NOT DEFINED _VCPKG_ROOT_DIR)
 	string(JOIN " " WARNING_FLAGS
-		"-U_FORTIFY_SOURCE"
-		"-D_FORTIFY_SOURCE=3"
 		"-Wall"
 		"-Walloca"
 		"-Wcast-align"
 		"-Wcast-qual"
-		"-Wcomma-subscript"
 		"-Wconversion"
 		"-Wctor-dtor-privacy"
 		"-Wdeprecated-copy-dtor"
 		"-Wdouble-promotion"
-		"-Wduplicated-branches"
-		"-Wduplicated-cond"
 		"-Wenum-conversion"
 		"-Wextra"
 		"-Wextra-semi"
 		"-Wfloat-equal"
-		"-Wformat-overflow=2"
-		"-Wformat-signedness"
+		"-Wformat-overflow"
 		"-Wformat=2"
-		"-Wframe-larger-than=${DEBUG_MIN_FRAME_SIZE}"
+		"-Wframe-larger-than=1048576"
 		"-Wimplicit-fallthrough"
-		"-Wjump-misses-init"
-		"-Wlogical-op"
 		"-Wmismatched-tags"
 		"-Wmissing-braces"
 		"-Wmultichar"
 		"-Wno-unused-parameter"
-		"-Wnoexcept"
 		"-Wnon-virtual-dtor"
 		"-Wnull-dereference"
 		"-Wold-style-cast"
@@ -75,17 +65,12 @@ if (NOT DEFINED _VCPKG_ROOT_DIR)
 		"-Wpedantic"
 		"-Wpointer-arith"
 		"-Wrange-loop-construct"
-		"-Wrestrict"
 		"-Wshadow"
 		"-Wsign-conversion"
-		"-Wstrict-null-sentinel"
-		"-Wsuggest-attribute=format"
-		"-Wsuggest-attribute=malloc"
 		"-Wundef"
 		"-Wuninitialized"
 		"-Wunused"
 		"-Wvla"
-		"-Wvolatile"
 		"-Wwrite-strings"
 	)
 endif ()

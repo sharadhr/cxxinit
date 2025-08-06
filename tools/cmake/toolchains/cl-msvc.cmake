@@ -13,8 +13,9 @@ set(CMAKE_CXX_COMPILER "cl.exe")
 set(CMAKE_ASM_COMPILER "cl.exe")
 set(CMAKE_RC_COMPILER "rc.exe")
 
-set(CMAKE_LINKER_TYPE MSVC)
-set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "ProgramDatabase")
+set(CMAKE_LINKER_TYPE LLD)
+set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "Embedded")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug,RTC>:Debug>DLL")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Some useful flags
@@ -69,7 +70,10 @@ string(JOIN " " ASAN_FLAGS
     "/O2"
     "/fsanitize=address"
 )
-set(RTC_FLAGS "/RTC1")
+string(JOIN " " RTC_FLAGS
+    "/Od"
+    "/RTC1"
+)
 
 set(FLAG_TYPES "C" "CXX")
 

@@ -4,16 +4,10 @@ if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
 	set(CMAKE_CROSSCOMPILING OFF CACHE BOOL "")
 	set(EXECUTABLE_SUFFIX ".exe")
 endif ()
-set(CMAKE_SYSROOT "C:/Program Files/LLVM")
-
-set(CMAKE_C_COMPILER_TARGET "x86_64-pc-windows-msvc")
-set(CMAKE_CXX_COMPILER_TARGET "x86_64-pc-windows-msvc")
 
 set(COMPILER_ARGS
 	"-g"
 	"-ferror-limit=0"
-	"-fms-extensions"
-	"-fms-hotpatch"
 )
 
 set(CMAKE_C_COMPILER
@@ -25,7 +19,7 @@ set(CMAKE_CXX_COMPILER
 	${COMPILER_ARGS}
 )
 set(CMAKE_ASM_COMPILER
-	"clang++${EXECUTABLE_SUFFIX}"
+	"clang${EXECUTABLE_SUFFIX}"
 	${COMPILER_ARGS}
 )
 set(CMAKE_RC_COMPILER
@@ -33,6 +27,8 @@ set(CMAKE_RC_COMPILER
 )
 
 set(CMAKE_LINKER_TYPE LLD)
+set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "Embedded")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug,RTC>:Debug>DLL")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Some useful flags
@@ -42,29 +38,22 @@ if (NOT DEFINED _VCPKG_ROOT_DIR)
 		"-Walloca"
 		"-Wcast-align"
 		"-Wcast-qual"
-		"-Wcomma-subscript"
 		"-Wconversion"
 		"-Wctor-dtor-privacy"
 		"-Wdeprecated-copy-dtor"
 		"-Wdouble-promotion"
-		"-Wduplicated-branches"
-		"-Wduplicated-cond"
 		"-Wenum-conversion"
 		"-Wextra"
 		"-Wextra-semi"
 		"-Wfloat-equal"
-		"-Wformat-overflow=2"
-		"-Wformat-signedness"
+		"-Wformat-overflow"
 		"-Wformat=2"
 		"-Wframe-larger-than=1048576"
 		"-Wimplicit-fallthrough"
-		"-Wjump-misses-init"
-		"-Wlogical-op"
 		"-Wmismatched-tags"
 		"-Wmissing-braces"
 		"-Wmultichar"
 		"-Wno-unused-parameter"
-		"-Wnoexcept"
 		"-Wnon-virtual-dtor"
 		"-Wnull-dereference"
 		"-Wold-style-cast"
@@ -72,37 +61,31 @@ if (NOT DEFINED _VCPKG_ROOT_DIR)
 		"-Wpedantic"
 		"-Wpointer-arith"
 		"-Wrange-loop-construct"
-		"-Wrestrict"
 		"-Wshadow"
 		"-Wsign-conversion"
-		"-Wstrict-null-sentinel"
-		"-Wsuggest-attribute=format"
-		"-Wsuggest-attribute=malloc"
-		"-Wundeclared-selector"
 		"-Wundef"
 		"-Wuninitialized"
-		"-Wunreachable-code"
 		"-Wunused"
 		"-Wvla"
-		"-Wvolatile"
 		"-Wwrite-strings"
 	)
 endif ()
-string(JOIN " " LINKER_FLAGS
-	"--start-no-unused-arguments"
-	"--rtlib=compiler-rt"
-	"--unwindlib=libunwind"
-	"-static-libgcc"
-	"--end-no-unused-arguments"
-)
-string(JOIN " " ASAN_FLAGS
+string(JOIN " " LINKER_FLAGS)
+
+# AddressSanitizer flags
+string(JOIN " " ASAN_COMPILER_FLAGS
+	"-O3"
 	"-fsanitize=address,undefined"
 	"-fno-omit-frame-pointer"
 )
-set(TSAN_FLAGS "-fsanitize=thread,undefined")
+string(JOIN " " ASAN_LINKER_FLAGS
+	"-fsanitize=address,undefined"
+)
 
 # different possible flag types
-set(FLAG_TYPES "C" "CXX" "EXE_LINKER" "SHARED_LINKER" "MODULE_LINKER")
+set(COMPILER_TYPES "C" "CXX")
+set(LINKER_TYPES "EXE_LINKER" "SHARED_LINKER" "MODULE_LINKER")
+set(FLAG_TYPES ${COMPILER_TYPES} ${LINKER_TYPES})
 
 # Add a new build type: LTO, equal to Release but with LTO
 if ($ENV{BUILD_WITH_LTO})
@@ -116,9 +99,12 @@ endif ()
 
 # Add `ASan` and `TSan` build types
 foreach (CONFIG "ASAN" "TSAN")
-	foreach (FLAG_TYPE ${FLAG_TYPES})
-		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_FLAGS}" CACHE STRING "" FORCE)
+	foreach (FLAG_TYPE ${COMPILER_TYPES})
+		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_COMPILER_FLAGS}" CACHE STRING "" FORCE)
 	endforeach ()
+	foreach (FLAG_TYPE ${LINKER_TYPES})
+		set(CMAKE_${FLAG_TYPE}_FLAGS_${CONFIG} "${${CONFIG}_LINKER_FLAGS}" CACHE STRING "" FORCE)
+	endforeach()
 endforeach ()
 
 # Set the default flags
