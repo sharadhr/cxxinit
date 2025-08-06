@@ -34,7 +34,8 @@
     {
       "name": "windows-clang-msvc-asan",
       "configuration": "ASan",
-      "configurePreset": "windows-clang-msvc"
+      "configurePreset": "windows-clang-msvc",
+      "verbose": true
     },
     {
       "name": "windows-cl-debug",
@@ -49,6 +50,11 @@
     {
       "name": "windows-cl-asan",
       "configuration": "ASan",
+      "configurePreset": "windows-cl"
+    },
+    {
+      "name": "windows-cl-rtc",
+      "configuration": "RTC",
       "configurePreset": "windows-cl"
     },
     {
