@@ -3,6 +3,10 @@ set(CMAKE_SYSTEM_PROCESSOR x86_64)
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
 	set(CMAKE_CROSSCOMPILING OFF CACHE BOOL "")
 endif ()
+if(NOT DEFINED ENV{LLVM_MINGW_SYSROOT})
+	message(FATAL_ERROR "The environment variable `LLVM_MINGW_SYSROOT` must be set to the LLVM MinGW sysroot path")
+endif()
+
 set(CMAKE_SYSROOT "$ENV{LLVM_MINGW_SYSROOT}")
 
 set(CMAKE_C_COMPILER_TARGET "x86_64-w64-mingw32")
