@@ -11,19 +11,19 @@ set(COMPILER_ARGS
 )
 
 set(CMAKE_C_COMPILER
-	"clang${EXECUTABLE_SUFFIX}"
+	"C:/Program Files/LLVM/bin/clang${EXECUTABLE_SUFFIX}"
 	${COMPILER_ARGS}
 )
 set(CMAKE_CXX_COMPILER
-	"clang++${EXECUTABLE_SUFFIX}"
+	"C:/Program Files/LLVM/bin/clang++${EXECUTABLE_SUFFIX}"
 	${COMPILER_ARGS}
 )
 set(CMAKE_ASM_COMPILER
-	"clang${EXECUTABLE_SUFFIX}"
+	"C:/Program Files/LLVM/bin/clang${EXECUTABLE_SUFFIX}"
 	${COMPILER_ARGS}
 )
 set(CMAKE_RC_COMPILER
-	"llvm-rc${EXECUTABLE_SUFFIX}"
+	"C:/Program Files/LLVM/bin/llvm-rc${EXECUTABLE_SUFFIX}"
 )
 
 set(CMAKE_LINKER_TYPE LLD)
