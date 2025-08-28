@@ -3,8 +3,11 @@
   "dependencies": [],
   "overrides": [],
   "vcpkg-configuration": {
+    "overlay-ports": [
+      "tools/vcpkg-overlays/ports"
+    ],
     "overlay-triplets": [
-      "tools/vcpkg_overlays/triplets"
+      "tools/vcpkg-overlays/triplets"
     ]
   }
 }
