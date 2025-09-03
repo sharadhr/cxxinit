@@ -5,3 +5,4 @@ set(VCPKG_LIBRARY_LINKAGE static)
 set(VCPKG_BUILD_TYPE release)
 
 set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/../../../tools/cmake/toolchains/clang-msvc.cmake")
+set(VCPKG_LOAD_VCVARS_ENV ON)
