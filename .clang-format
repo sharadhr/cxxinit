@@ -8,14 +8,14 @@ AlignConsecutiveShortCaseStatements:
   AcrossEmptyLines: true
   AlignCaseColons: false
 BinPackArguments: true
-BinPackParameters: true
+BinPackParameters: OnePerLine
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: true
   AfterControlStatement: Never
   AfterEnum: true
   AfterFunction: true
-  AfterNamespace: false
+  AfterNamespace: true
   AfterObjCDeclaration: false
   AfterStruct: true
   AfterUnion: true
@@ -30,7 +30,7 @@ BraceWrapping:
   SplitEmptyNamespace: false
 BreakBeforeBraces: Custom
 BreakStringLiterals: false
-ColumnLimit: 160
+ColumnLimit: 120
 CompactNamespaces: true
 IndentRequiresClause: true
 RequiresClausePosition: WithPreceding
@@ -38,5 +38,12 @@ InsertBraces: true
 PointerAlignment: Left
 QualifierAlignment: Custom
 QualifierOrder: [static, constexpr, inline, volatile, type, const]
-UseTab: ForIndentation
+TabWidth: 2
+UseTab: AlignWithSpaces
+SeparateDefinitionBlocks: Always
+PackConstructorInitializers: NextLine
+BreakBeforeBinaryOperators: NonAssignment
+ContinuationIndentWidth: 2
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerIndentWidth: 2
 
